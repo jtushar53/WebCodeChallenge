@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ID } from '@datorama/akita';
-import { tap } from 'rxjs';
+import { map, tap } from 'rxjs';
 import { UserApiService } from './api.service';
 import { UserStore } from './store';
+
+export type UsersParams = { q: string; per_page: number; page: number };
 
 @Injectable({ providedIn: 'root' })
 export class UserStoreService {
@@ -11,9 +13,26 @@ export class UserStoreService {
     private userApiService: UserApiService
   ) {}
 
-  search() {
-    return this.userApiService
-      .search()
-      .pipe(tap((users) => this.userStore.set(users)));
+  search(searchParams: UsersParams) {
+    return this.userApiService.search(searchParams).pipe(
+      map((response) => {
+        console.log('reepponse from server');
+        console.log(response);
+        const { total_count, items } = response;
+        // assuming we only need three fields
+        const trimmedItems = items.map((item) => {
+          const { login, avatar_url, html_url } = item;
+          return { login, avatar_url, html_url };
+        });
+
+        return {
+          total_count,
+          items: trimmedItems,
+        };
+      }),
+      tap((users) => {
+        this.userStore.set(users);
+      })
+    );
   }
 }

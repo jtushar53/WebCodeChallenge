@@ -45,6 +45,7 @@
       id="search"
       type="text"
       placeholder="Search for users"
+      [formControl]="searchField"
     />
   </div>
   <div class="flow-root">
@@ -182,6 +183,9 @@
           </div>
         </div>
       </li>
+      {{
+        searchResults$ | async | json
+      }}
     </ul>
   </div>
 </div>

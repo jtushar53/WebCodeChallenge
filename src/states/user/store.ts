@@ -6,9 +6,9 @@ import {
   getInitialEntitiesState,
   ActiveState,
 } from '@datorama/akita';
-import { UserSearchList } from './model';
+import { UserList } from './model';
 
-export interface UserState extends EntityState<UserSearchList>, ActiveState {}
+export interface UserState extends EntityState<UserList>, ActiveState {}
 
 const initialState = {
   ...getInitialEntitiesState(),
@@ -18,7 +18,7 @@ const initialState = {
   providedIn: 'root',
 })
 @StoreConfig({ name: 'users' })
-export class UserStore extends EntityStore<ListsState, UserSearchList> {
+export class UserStore extends EntityStore<UserState, UserList> {
   constructor() {
     super(initialState);
   }
