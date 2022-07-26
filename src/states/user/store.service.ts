@@ -8,6 +8,7 @@ export type UsersParams = { q: string; per_page: number; page: number };
 
 @Injectable({ providedIn: 'root' })
 export class UserStoreService {
+  initialId = 0;
   constructor(
     private userStore: UserStore,
     private userApiService: UserApiService
@@ -25,13 +26,14 @@ export class UserStoreService {
           return { login, avatar_url, html_url };
         });
         return {
+          id: this.initialId++,
           searchStr: searchParams.q,
           total_count,
           items: trimmedItems,
         };
       }),
       tap((users: any) => {
-        this.userStore.set(users);
+        this.userStore.add(users, { prepend: true });
         console.log(this.userStore.getValue());
       })
     );

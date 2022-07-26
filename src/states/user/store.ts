@@ -17,7 +17,7 @@ const initialState = {
 @Injectable({
   providedIn: 'root',
 })
-@StoreConfig({ name: 'users' })
+@StoreConfig({ name: 'users', resettable: true })
 export class UserStore extends EntityStore<UserState, UserList> {
   constructor() {
     super(initialState);
