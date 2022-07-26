@@ -1,1 +1,34 @@
-<h1 class="text-3xl font-bold underline">Hello world!</h1>
+<ul
+  class="
+    flex flex-wrap
+    justify-center
+    text-sm
+    font-medium
+    mt-5
+    text-center text-gray-500
+    dark:text-gray-400
+  "
+>
+  <li class="mr-2">
+    <a
+      href="#"
+      [routerLink]="['/search']"
+      [routerLinkActive]="['text-white', 'bg-blue-600', 'rounded-lg']"
+      class="inline-block py-3 px-4"
+      aria-current="page"
+      >Search</a
+    >
+  </li>
+  <li class="mr-2">
+    <a
+      href="#"
+      [routerLink]="['/history']"
+      [routerLinkActive]="['text-white', 'bg-blue-600', 'rounded-lg']"
+      class="inline-block py-3 px-4"
+      >History</a
+    >
+  </li>
+</ul>
+<div class="container mx-auto flex justify-center px-4">
+  <router-outlet></router-outlet>
+</div>
