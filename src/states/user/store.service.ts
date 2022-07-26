@@ -24,14 +24,15 @@ export class UserStoreService {
           const { login, avatar_url, html_url } = item;
           return { login, avatar_url, html_url };
         });
-
         return {
+          searchStr: searchParams.q,
           total_count,
           items: trimmedItems,
         };
       }),
-      tap((users) => {
+      tap((users: any) => {
         this.userStore.set(users);
+        console.log(this.userStore.getValue());
       })
     );
   }

@@ -1,4 +1,5 @@
 export interface UserList {
+  searchStr: string;
   total_count: number;
   items: User[];
 }

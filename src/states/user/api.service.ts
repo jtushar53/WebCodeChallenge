@@ -15,8 +15,8 @@ export class UserApiService {
         new URLSearchParams(queryParams).toString(),
       {
         headers: {
-          Accept: '',
-          Authorization: 'token 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',
+          Accept: 'application/vnd.github+json',
+          Authorization: 'token ' + environment.token,
         },
       }
     );
