@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserStore } from '../states/user/store';
 import { UserQuery } from '../states/user/store.query';
 
@@ -9,8 +10,12 @@ import { UserQuery } from '../states/user/store.query';
 })
 export class HistoryComponent implements OnInit {
   recentSearches$;
-
-  constructor(private userQuery: UserQuery, private userStore: UserStore) {}
+  selectedSearch;
+  constructor(
+    private userQuery: UserQuery,
+    private userStore: UserStore,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.recentSearches$ = this.userQuery.selectAll();
@@ -28,5 +33,6 @@ export class HistoryComponent implements OnInit {
 
   openUserProfile(userSearch) {
     console.log(userSearch);
+    this.selectedSearch = userSearch;
   }
 }

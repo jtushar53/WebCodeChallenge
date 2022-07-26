@@ -6,7 +6,6 @@ import { debounceTime } from 'rxjs/internal/operators/debounceTime';
 import { distinctUntilChanged } from 'rxjs/internal/operators/distinctUntilChanged';
 import { map } from 'rxjs/internal/operators/map';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
-import { UserApiService } from '../states/user/api.service';
 import { UserQuery } from '../states/user/store.query';
 import { UserStoreService } from '../states/user/store.service';
 
@@ -25,6 +24,7 @@ export class SearchComponent implements OnInit {
       debounceTime(700),
       distinctUntilChanged(),
       switchMap((searchString) => {
+        console.log('search');
         if (!searchString) {
           return of({ items: [] });
         }
